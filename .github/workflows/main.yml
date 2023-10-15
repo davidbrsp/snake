@@ -1,16 +1,17 @@
 name: Docker Image build
 
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+    types:
+      - closed
   workflow_dispatch:
 
 jobs:
 
   build:
     name: Build Docker image and push to repositories
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
 
     steps:
@@ -27,11 +28,10 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           context: .
-          file: ./Dockerfile
           push: true
           tags: davidbrsp/snake:latest
           
-      - name: deploying
+      - name: Deploying using SSH
         uses: appleboy/ssh-action@v0.1.8
         with:
           host: ${{ secrets.PROD_SSH_HOST }}
