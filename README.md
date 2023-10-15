@@ -1,6 +1,6 @@
 # HTML5 & JavaScript Snake Game
 
-adaptation by **Matias Beckerle**
+adaptation by **Matias Beckerle** and **David Macedo**
 
 Licensed under The MIT License (http://www.opensource.org/licenses/mit-license.php)
 
