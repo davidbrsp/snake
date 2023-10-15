@@ -32,12 +32,13 @@ jobs:
       - name: deploying
         uses: appleboy/ssh-action@v0.1.8
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          password: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.SSH_PORT }}
+          host: ${{ secrets.PROD_SSH_HOST }}
+          username: ${{ secrets.PROD_SSH_USER }}
+          key: ${{ secrets.PROD_SSH_KEY }}
+          # password: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.PROD_SSH_PORT }}
           script: |
             docker image pull davidbrsp/snake:latest
             docker container stop snake-container
             docker container rm snake-container
-            docker container run -d --name snake-container -p 80:5000 davidbrsp/snake
+            docker container run -d --name snake-container -p 80:80 davidbrsp/snake
