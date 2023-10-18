@@ -1,0 +1,32 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: snake
+  namespace: default
+  labels:
+    app: snake
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: snake
+  template:
+    metadata:
+      labels:
+        app: snake
+    spec:
+      containers:
+        - name: snake
+          image: docker.io/davidbrsp/snake:latest
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: 500m
+              memory: "52428800"
+            requests:
+              cpu: 250m
+              memory: "20971520"
+      imagePullSecrets:
+      - name: free-registry-secret
